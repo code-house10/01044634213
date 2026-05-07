@@ -641,7 +641,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             فريق متخصص، سيارات مجهزة، وونش هيدروليكي حديث لنقل الأثاث بدون خدوش أو كسر مع التزام كامل بالمواعيد.
                         </p>
                         <div class="slide-actions flex flex-col sm:flex-row gap-4 mb-8">
-                            <a href="tel:01044634213" class="inline-flex items-center justify-center gap-3 bg-secondary hover:bg-amber-700 text-white font-bold py-4 px-8 rounded-full transition shadow-2xl shadow-secondary/30"><i class="fas fa-phone-volume"></i>اتصل الآن <span dir="ltr">01044634213</span></a>
+                            <a href="#call-confirm-modal" data-open-call-modal="true" data-phone-display="01044634213" data-phone-track="+201044634213" data-source="hero_carousel_cta" class="inline-flex items-center justify-center gap-3 bg-secondary hover:bg-amber-700 text-white font-bold py-4 px-8 rounded-full transition shadow-2xl shadow-secondary/30"><i class="fas fa-phone-volume"></i>اتصل الآن <span dir="ltr">01044634213</span></a>
                             <a href="https://wa.me/201044634213" target="_blank" class="inline-flex items-center justify-center gap-3 bg-white/15 hover:bg-white/25 text-white font-bold py-4 px-8 rounded-full transition border border-white/25 backdrop-blur-md"><i class="fab fa-whatsapp text-xl"></i>راسلنا واتساب</a>
                         </div>
                         <div class="slide-features grid grid-cols-3 gap-3 max-w-xl text-center">
@@ -670,7 +670,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <h2 class="slide-title text-4xl md:text-6xl lg:text-7xl font-black leading-tight mb-5 drop-shadow-2xl">نحمي مقتنياتك <span>من الخدش والكسر</span><br class="hidden md:block"/> بخامات قوية</h2>
                         <p class="slide-desc text-base md:text-xl text-gray-100 leading-relaxed mb-8 max-w-2xl">نستخدم الكرتون المقوى، الاسترتش، والبابلز لتغليف الزجاج والأجهزة والموبيليا بعناية قبل التحميل والنقل.</p>
                         <div class="slide-actions flex flex-col sm:flex-row gap-4 mb-8">
-                            <a href="tel:01044634213" class="inline-flex items-center justify-center gap-3 bg-secondary hover:bg-amber-700 text-white font-bold py-4 px-8 rounded-full transition shadow-2xl shadow-secondary/30"><i class="fas fa-phone-volume"></i>اطلب خدمة التغليف</a>
+                            <a href="#call-confirm-modal" data-open-call-modal="true" data-phone-display="01044634213" data-phone-track="+201044634213" data-source="hero_carousel_cta" class="inline-flex items-center justify-center gap-3 bg-secondary hover:bg-amber-700 text-white font-bold py-4 px-8 rounded-full transition shadow-2xl shadow-secondary/30"><i class="fas fa-phone-volume"></i>اطلب خدمة التغليف</a>
                             <a href="https://wa.me/201044634213" target="_blank" class="inline-flex items-center justify-center gap-3 bg-white/15 hover:bg-white/25 text-white font-bold py-4 px-8 rounded-full transition border border-white/25 backdrop-blur-md"><i class="fab fa-whatsapp text-xl"></i>إرسال تفاصيل العفش</a>
                         </div>
                         <div class="slide-features grid grid-cols-3 gap-3 max-w-xl text-center">
@@ -694,7 +694,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <h2 class="slide-title text-4xl md:text-6xl lg:text-7xl font-black leading-tight mb-5 drop-shadow-2xl">رفع وتنزيل الأثاث <span>بدون تعب</span><br class="hidden md:block"/> حتى الأدوار العالية</h2>
                         <p class="slide-desc text-base md:text-xl text-gray-100 leading-relaxed mb-8 max-w-2xl">الونش الهيدروليكي يساعد في نقل العفش من البلكونات والشبابيك بأمان، خصوصًا مع السلالم الضيقة والأدوار المرتفعة.</p>
                         <div class="slide-actions flex flex-col sm:flex-row gap-4 mb-8">
-                            <a href="tel:01044634213" class="inline-flex items-center justify-center gap-3 bg-secondary hover:bg-amber-700 text-white font-bold py-4 px-8 rounded-full transition shadow-2xl shadow-secondary/30"><i class="fas fa-phone-volume"></i>اطلب الونش الآن</a>
+                            <a href="#call-confirm-modal" data-open-call-modal="true" data-phone-display="01044634213" data-phone-track="+201044634213" data-source="hero_carousel_cta" class="inline-flex items-center justify-center gap-3 bg-secondary hover:bg-amber-700 text-white font-bold py-4 px-8 rounded-full transition shadow-2xl shadow-secondary/30"><i class="fas fa-phone-volume"></i>اطلب الونش الآن</a>
                             <a href="https://wa.me/201044634213" target="_blank" class="inline-flex items-center justify-center gap-3 bg-white/15 hover:bg-white/25 text-white font-bold py-4 px-8 rounded-full transition border border-white/25 backdrop-blur-md"><i class="fab fa-whatsapp text-xl"></i>احجز موعد النقل</a>
                         </div>
                         <div class="slide-features grid grid-cols-3 gap-3 max-w-xl text-center">
@@ -1485,9 +1485,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             document.body.classList.remove('overflow-hidden');
         }
 
-        floatingCallTrigger.addEventListener('click', function (e) {
-            e.preventDefault();
-            openCallModal(this);
+        document.querySelectorAll('[data-open-call-modal="true"]').forEach(function (trigger) {
+            trigger.addEventListener('click', function (e) {
+                e.preventDefault();
+                openCallModal(this);
+            });
         });
 
         closeCallModalBtn.addEventListener('click', closeCallModal);
