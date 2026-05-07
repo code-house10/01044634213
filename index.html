@@ -290,6 +290,166 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         .image-stack img:nth-child(2) { transform: rotate(-3deg); }
         .image-stack img:hover { transform: rotate(0deg) scale(1.03); z-index: 20; }
 
+        /* Floating call button inspired by uploaded reference */
+        body {
+            padding-bottom: 110px;
+        }
+        .floating-call-shell {
+            position: fixed;
+            left: 50%;
+            bottom: 14px;
+            transform: translateX(-50%);
+            width: min(96%, 980px);
+            z-index: 60;
+            background: rgba(233, 237, 244, 0.96);
+            border: 1px solid rgba(203, 213, 225, 0.85);
+            border-radius: 28px;
+            padding: 10px;
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.14);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .floating-call-btn-ref {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            border-radius: 24px;
+            background: linear-gradient(135deg, #2F67E5, #2F67E5);
+            color: #fff;
+            padding: 18px 20px;
+            font-size: 20px;
+            font-weight: 900;
+            transition: transform .2s ease, background .2s ease;
+            box-shadow: 0 12px 28px rgba(47, 103, 229, 0.28);
+        }
+        .floating-call-btn-ref:hover {
+            background: linear-gradient(135deg, #2859C7, #2859C7);
+            transform: translateY(-1px);
+        }
+        .floating-call-btn-ref .call-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,.12);
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,.10);
+        }
+
+        /* 2-step call confirmation modal */
+        .call-modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            background: rgba(2, 6, 23, 0.68);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        .call-modal-overlay.show {
+            display: flex;
+        }
+        .call-modal-card {
+            width: min(100%, 430px);
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 28px 22px 22px;
+            box-shadow: 0 24px 70px rgba(15, 23, 42, 0.28);
+            text-align: center;
+            transform: translateY(12px) scale(.96);
+            opacity: 0;
+            transition: transform .22s ease, opacity .22s ease;
+            position: relative;
+        }
+        .call-modal-overlay.show .call-modal-card {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+        .call-modal-step.hidden {
+            display: none;
+        }
+        .call-modal-icon {
+            width: 78px;
+            height: 78px;
+            margin: 0 auto 18px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #EFF6FF;
+            color: #2F67E5;
+            font-size: 34px;
+            box-shadow: inset 0 0 0 1px rgba(47, 103, 229, 0.08);
+        }
+        .call-modal-number-box {
+            border: 2px dashed #BFDBFE;
+            background: #EFF6FF;
+            border-radius: 22px;
+            padding: 16px;
+            margin: 18px 0;
+        }
+        .call-modal-number-box .phone-number {
+            font-size: 34px;
+            line-height: 1.2;
+            font-weight: 900;
+            color: #2F67E5;
+            letter-spacing: .04em;
+        }
+        .call-modal-primary,
+        .call-modal-secondary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            border-radius: 18px;
+            padding: 15px 18px;
+            font-weight: 900;
+            transition: .2s ease;
+        }
+        .call-modal-primary {
+            background: #2F67E5;
+            color: #fff;
+            box-shadow: 0 14px 26px rgba(47, 103, 229, 0.25);
+        }
+        .call-modal-primary:hover {
+            background: #2859C7;
+        }
+        .call-modal-secondary {
+            background: #F1F5F9;
+            color: #475569;
+            margin-top: 10px;
+        }
+        .call-modal-secondary:hover {
+            background: #E2E8F0;
+        }
+        @media (max-width: 768px) {
+            .floating-call-shell {
+                width: calc(100% - 20px);
+                bottom: 10px;
+                border-radius: 24px;
+                padding: 8px;
+            }
+            .floating-call-btn-ref {
+                border-radius: 22px;
+                padding: 16px 14px;
+                font-size: 17px;
+            }
+            .floating-call-btn-ref .call-icon {
+                width: 30px;
+                height: 30px;
+            }
+            .call-modal-number-box .phone-number {
+                font-size: 28px;
+            }
+        }
+
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -1241,14 +1401,120 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </a>
 </div>
 
-<!-- Floating CTA -->
-
-<div class="fixed bottom-6 left-4 md:left-8 z-50">
-    <a href="tel:01044634213" class="flex items-center gap-3 bg-secondary hover:bg-amber-700 text-white py-3 px-5 md:py-3.5 md:px-8 rounded-full shadow-lg shadow-secondary/40 transition transform hover:scale-105 animate-bounce-slow text-sm md:text-base border-2 border-white/20">
-        <i class="fas fa-phone-volume text-xl md:text-2xl animate-pulse"></i>
-        <span class="font-bold text-lg md:text-xl tracking-wider" dir="ltr">01044634213</span>
+<!-- Floating CTA styled like the uploaded reference image -->
+<div class="floating-call-shell">
+    <a href="#call-confirm-modal"
+       id="floating-call-trigger"
+       class="floating-call-btn-ref"
+       data-open-call-modal="true"
+       data-phone-display="01044634213"
+       data-phone-track="+201044634213"
+       data-source="floating_call_button">
+        <span class="call-icon"><i class="fas fa-phone-volume"></i></span>
+        <span>اتصل واحجز الخصم الآن</span>
     </a>
 </div>
+
+
+<!-- One-Step Call Confirmation Modal -->
+<div id="call-confirm-modal" class="call-modal-overlay" aria-hidden="true">
+    <div class="call-modal-card">
+        <div class="call-modal-step">
+            <div class="call-modal-icon" style="background:#ECFDF5;color:#16A34A;">
+                <i class="fas fa-circle-check"></i>
+            </div>
+            <p class="text-sm font-bold text-secondary mb-2">اتصال مباشر</p>
+            <h3 class="text-2xl font-black text-gray-900 mb-3">اضغط للاتصال الآن</h3>
+            <p class="text-sm text-gray-500 leading-relaxed">
+                اتصل الآن واحصل على عرض سعر سريع وخصم خاص قبل انتهاء العرض. فريقنا جاهز يرد عليك فورًا ويحدد لك أنسب موعد للنقل.
+            </p>
+            <div class="call-modal-number-box">
+                <p class="text-xs font-bold text-gray-500 mb-2">رقم الاتصال</p>
+                <p id="call-modal-phone-display" class="phone-number" dir="ltr">01044634213</p>
+            </div>
+            <a id="final-call-link"
+               href="tel:+201044634213"
+               class="call-modal-primary"
+               data-gtm-final-call="true"
+               data-call-source="floating_call_button"
+               data-phone="+201044634213">
+                <i class="fas fa-phone"></i>
+                اتصل الآن
+            </a>
+            <button type="button" id="close-call-modal-btn" class="call-modal-secondary">إغلاق</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        window.dataLayer = window.dataLayer || [];
+
+        const callModal = document.getElementById('call-confirm-modal');
+        const closeCallModalBtn = document.getElementById('close-call-modal-btn');
+        const finalCallLink = document.getElementById('final-call-link');
+        const floatingCallTrigger = document.getElementById('floating-call-trigger');
+        const phoneDisplay = document.getElementById('call-modal-phone-display');
+
+        let currentCallSource = 'floating_call_button';
+
+        function openCallModal(triggerEl) {
+            const displayPhone = triggerEl?.getAttribute('data-phone-display') || '01044634213';
+            const trackPhone = triggerEl?.getAttribute('data-phone-track') || '+201044634213';
+            currentCallSource = triggerEl?.getAttribute('data-source') || 'floating_call_button';
+
+            phoneDisplay.textContent = displayPhone;
+            finalCallLink.setAttribute('href', 'tel:' + trackPhone);
+            finalCallLink.setAttribute('data-phone', trackPhone);
+            finalCallLink.setAttribute('data-call-source', currentCallSource);
+
+            callModal.classList.add('show');
+            callModal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('overflow-hidden');
+
+            window.dataLayer.push({
+                event: 'call_modal_open',
+                call_source: currentCallSource,
+                phone_display: displayPhone
+            });
+        }
+
+        function closeCallModal() {
+            callModal.classList.remove('show');
+            callModal.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        floatingCallTrigger.addEventListener('click', function (e) {
+            e.preventDefault();
+            openCallModal(this);
+        });
+
+        closeCallModalBtn.addEventListener('click', closeCallModal);
+
+        callModal.addEventListener('click', function (e) {
+            if (e.target === callModal) {
+                closeCallModal();
+            }
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && callModal.classList.contains('show')) {
+                closeCallModal();
+            }
+        });
+
+        finalCallLink.addEventListener('click', function () {
+            window.dataLayer.push({
+                event: 'confirmed_call_click',
+                call_source: finalCallLink.getAttribute('data-call-source'),
+                click_url: finalCallLink.getAttribute('href'),
+                phone: finalCallLink.getAttribute('data-phone')
+            });
+            setTimeout(closeCallModal, 500);
+        });
+    })();
+</script>
 
 </body>
 </html>
